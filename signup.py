@@ -4,11 +4,11 @@
 
 # import tkinter library
 from tkinter import *
+from tkinter import messagebox
+# Signup Screen Class
 
-# Login Screen Class
 
-
-class LoginScreen:
+class SignUpScreen:
     # slaving gender
     gender = StringVar
     # Storing input into variables
@@ -32,7 +32,7 @@ class LoginScreen:
 
         # creating widgets
         # Header Frame
-        self.labelframe_header = LabelFrame(self.window,bg="#ebec00", width=200, heigh=100)
+        self.labelframe_header = LabelFrame(self.window, bg="#ebec00", width=200, heigh=100)
         self.labelframe_header.pack(fill="both")
         # Header widget
         self.label_header = Label(self.labelframe_header, text="SIGN UP", bg="#ebec00", font="Times 30 bold")
@@ -43,28 +43,28 @@ class LoginScreen:
         self.label_login = Label(self.labelframe_login, font="Times 14", bg="#ebec00")
         self.label_login.place(y=10, x=270)
         # Name widget
-        self.label_email = Label(self.labelframe_login, text="NAME", font="Times 14", bg="#ebec00")
-        self.label_email.place(y=10, x=100)
-        self.entry_email = Entry(self.labelframe_login, font="Times 12", bg="#3986d2", width=40)
-        self.entry_email.place(y=10, x=250)
+        self.label_name = Label(self.labelframe_login, text="NAME", font="Times 14", bg="#ebec00")
+        self.label_name.place(y=10, x=100)
+        self.entry_name = Entry(self.labelframe_login, font="Times 12", bg="#3986d2", width=40)
+        self.entry_name.place(y=10, x=250)
         # Surname widget
-        self.label_email = Label(self.labelframe_login, text="SURNAME", font="Times 14", bg="#ebec00")
-        self.label_email.place(y=50, x=100)
-        self.entry_email = Entry(self.labelframe_login, font="Times 12", bg="#3986d2", width=40)
-        self.entry_email.place(y=50, x=250)
+        self.label_surname = Label(self.labelframe_login, text="SURNAME", font="Times 14", bg="#ebec00")
+        self.label_surname.place(y=50, x=100)
+        self.entry_surname = Entry(self.labelframe_login, font="Times 12", bg="#3986d2", width=40)
+        self.entry_surname.place(y=50, x=250)
         # i.d widget
         self.label_id = Label(self.labelframe_login, text="I.D", font="Times 16", bg="#ebec00")
         self.label_id.place(y=95, x=100)
         self.entry_id = Entry(self.labelframe_login, font="Times 12", bg="#3986d2", width=40)
         self.entry_id.place(y=95, x=250)
         # Email widget
-        self.label_id = Label(self.labelframe_login, text="EMAIL", font="Times 16", bg="#ebec00")
-        self.label_id.place(y=140, x=100)
-        self.entry_id = Entry(self.labelframe_login, font="Times 12", bg="#3986d2", width=40)
-        self.entry_id.place(y=140, x=250)
+        self.label_email = Label(self.labelframe_login, text="EMAIL", font="Times 16", bg="#ebec00")
+        self.label_email.place(y=140, x=100)
+        self.entry_email = Entry(self.labelframe_login, font="Times 12", bg="#3986d2", width=40)
+        self.entry_email.place(y=140, x=250)
         # Gender Selection Widget
-        self.label_id = Label(self.labelframe_login, text="GENDER", font="Times 16", bg="#ebec00")
-        self.label_id.place(y=180, x=100)
+        self.label_gender = Label(self.labelframe_login, text="GENDER", font="Times 16", bg="#ebec00")
+        self.label_gender.place(y=180, x=100)
         self.radio_button_male = Radiobutton(self.labelframe_login, text="MALE", value="MALE",
                                              textvariable=self.gender, font="Times 16", bg="#3986d2")
         self.radio_button_male.place(y=180, x=250)
@@ -90,7 +90,8 @@ class LoginScreen:
                                  width=4)
         self.entry_years.place(y=220, x=420)
         # buttons
-        self.button_signup = Button(self.labelframe_login, text="SIGN UP", font="Times 16", bg="#3986d2")
+        self.button_signup = Button(self.labelframe_login, text="SIGN UP", font="Times 16", bg="#3986d2",
+                                    command=self.sign_up_button)
         self.button_signup.place(y=300, x=150)
         self.button_exit = Button(self.labelframe_login, text="EXIT", font="Times 16", bg="#3986d2",
                                   command=self.exit_button)
@@ -102,15 +103,20 @@ class LoginScreen:
         self.window.mainloop()
 
     # Functions for buttons
-    def login_button(self):
-        pass
+    def sign_up_button(self):
+        # import login
+        try:
+            if self.entry_name.get() == "" or self.entry_surname.get() == "" or self.entry_id.get() == "" or \
+                    self.entry_email.get() == "" or self.entry_days.get() == "" or self.entry_months.get() == "" \
+                    or self.entry_years.get() == "":
+                messagebox.showwarning("INVALID INPUT", "Please fill in all inputs")
 
-    def signup_button(self):
-        pass
+        except ValueError:
+            messagebox.showinfo("ERROR", "PLEASE ENTER 13 DIGITS FOR I.D")
 
     def exit_button(self):
         self.window.destroy()
 
 
-# Runs Login Screen
-LoginScreen()
+# Runs Sign Up Screen
+SignUpScreen()
