@@ -20,7 +20,7 @@ class LoginScreen:
 
         # creating widgets
         # Header Frame
-        self.labelframe_header = LabelFrame(self.window,bg="#ebec00", width=200, heigh=100)
+        self.labelframe_header = LabelFrame(self.window, bg="#ebec00", width=200, heigh=100)
         self.labelframe_header.pack(fill="both")
         # Header widget
         self.label_header = Label(self.labelframe_header, text="WELCOME", bg="#ebec00", font="Times 30 bold")
@@ -43,9 +43,11 @@ class LoginScreen:
         self.entry_id = Entry(self.labelframe_login, font="Times 16", bg="#3986d2")
         self.entry_id.place(y=170, x=250)
         # buttons
-        self.button_login = Button(self.labelframe_login, text="LOGIN", font="Times 16", bg="#3986d2")
+        self.button_login = Button(self.labelframe_login, text="LOGIN", font="Times 16", bg="#3986d2",
+                                   command=self.login_button)
         self.button_login.place(y=300, x=150)
-        self.button_signup = Button(self.labelframe_login, text="SIGN UP", font="Times 16", bg="#3986d2")
+        self.button_signup = Button(self.labelframe_login, text="SIGN UP", font="Times 16", bg="#3986d2",
+                                    command=self.signup_button)
         self.button_signup.place(y=300, x=250)
         self.button_exit = Button(self.labelframe_login, text="EXIT", font="Times 16", bg="#3986d2",
                                   command=self.exit_button)
@@ -58,10 +60,12 @@ class LoginScreen:
 
     # Functions for buttons
     def login_button(self):
-        pass
+        self.window.destroy()
+        import main
 
     def signup_button(self):
-        pass
+        self.window.destroy()
+        import signup
 
     def exit_button(self):
         self.window.destroy()
