@@ -196,15 +196,33 @@ class Main:
         # Display Sets
         self.labelframe_display_sets = LabelFrame(self.window, bg="#ebec00", width=400, heigh=450)
         self.labelframe_display_sets.place(y=120, x=580)
-        self.label_display_set_one = Label(self.labelframe_display_sets, bg="#3986d2", font="Times 16")
-        self.label_display_set_one.place(y=75, x=100)
-        self.label_display_set_two = Label(self.labelframe_display_sets, bg="#3986d2", font="Times 16")
-        self.label_display_set_two.place(y=250, x=50)
-        self.label_display_set_three = Label(self.labelframe_display_sets, bg="#3986d2", font="Times 16")
-        self.label_display_set_three.place(y=400, x=100)
-        # buttons inside display sets frame
+        # Set One
+        self.label_set_one = Label(self.labelframe_display_sets, text="FIRST SET OF NUMBERS", bg="#ebec00")
+        self.label_set_one.place(y=10, x=100)
+        self.label_display_set_one = Label(self.labelframe_display_sets, bg="#ebec00")
+        self.label_display_set_one.place(y=40, x=110)
+        # Set Two
+        self.label_set_two = Label(self.labelframe_display_sets, text="SECOND SET OF NUMBERS", bg="#ebec00")
+        self.label_set_two.place(y=70, x=100)
+        self.label_display_set_two = Label(self.labelframe_display_sets, bg="#ebec00")
+        self.label_display_set_two.place(y=100, x=110)
+        # Set Three
+        self.label_set_two = Label(self.labelframe_display_sets, text="THIRD SET OF NUMBERS", bg="#ebec00")
+        self.label_set_two.place(y=130, x=100)
+        self.label_display_set_three = Label(self.labelframe_display_sets, bg="#ebec00")
+        self.label_display_set_three.place(y=160, x=110)
+        # Generating Lotto Numbers
+        self.button_display_lotto_numbers = Button(self.labelframe_display_sets, bg="#ebec00", text="DISPLAY LOTTO "
+                                                                                                    "NUMBERS",
+                                                   command=self.display_lotto_numbers)
+        self.button_display_lotto_numbers.place(y=200, x=90)
+        # Displaying Prizes
+        self.button_display_prizes = Button(self.labelframe_display_sets, bg="#ebec00", text="DISPLAY PRIZES",
+                                            command=self.display_prizes)
+        self.button_display_prizes.place(y=260, x=110)
+        # buttons
         self.button_play_again = Button(self.window, text="PLAY AGAIN", font="Times 12", bg="#ebec00",
-                                        command=self.play_again)
+                                        command=self.play)
         self.button_play_again.place(y=580, x=250)
         self.button_cash_out = Button(self.window, text="CASH OUT", font="Times 12", bg="#ebec00",
                                       command=self.cash_out)
@@ -219,21 +237,34 @@ class Main:
         self.window.mainloop()
 
     # Function for each button
+    def display_lotto_numbers(self):
+        label_display_lottoNumbers = Label(self.labelframe_display_sets, text=self.my_winning_list)
+        label_display_lottoNumbers.place(y=235, x=130)
+
+    def display_prizes(self):
+        label_first_set_winning = Label(self.labelframe_display_sets, text="Winnings From Set One ", bg="#ebec00")
+        label_first_set_winning.place(y=300, x=10)
+        label_second_set_winning = Label(self.labelframe_display_sets, text="Winnings From Set Two ", bg="#ebec00")
+        label_second_set_winning.place(y=350, x=10)
+        label_third_set_winning = Label(self.labelframe_display_sets, text="Winnings From Set Three ", bg="#ebec00")
+        label_third_set_winning.place(y=400, x=10)
+
     def displaying_numbers(self, num):
-        # label_numbers = Label(self.labelframe_display_sets, text=str(num))
-        if len(self.my_list_one) < 6:
+        if len(self.my_list_one) < 6 and num not in self.my_list_one:
             self.my_list_one.append(num)
             self.label_display_set_one.config(text=str(self.my_list_one))
-        elif len(self.my_list_two) < 6 and len(self.my_list_one) == 6:
+        elif len(self.my_list_two) < 6 and len(self.my_list_one) == 6 and num not in self.my_list_two and num not in \
+                self.my_list_one:
             self.my_list_two.append(num)
             self.label_display_set_two.config(text=str(self.my_list_two))
-        elif len(self.my_list_three) < 6 and len(self.my_list_two) == 6 and len(self.my_list_one) == 6:
+        elif len(self.my_list_three) < 6 and len(self.my_list_two) == 6 and len(self.my_list_one) == 6 and num not in\
+                self.my_list_three and num not in self.my_list_two and num not in self.my_list_one:
             self.my_list_three.append(num)
             self.label_display_set_three.config(text=str(self.my_list_three))
-    # Functions for buttons
 
-    def play_again(self):
-        self.button_one.config(state=NORMAL)
+    # Functions for buttons
+    def play(self):
+        pass
 
     def cash_out(self):
         self.window.destroy()
