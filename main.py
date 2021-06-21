@@ -6,6 +6,9 @@
 from tkinter import *
 from tkinter import messagebox
 import random
+
+import read_write_to_file
+from read_write_to_file import writing_file
 from playsound import playsound
 
 
@@ -219,7 +222,7 @@ class Main:
                     set_prize_three.append(x)
             # Condition for set one
             if len(set_prize_one) == 2:
-                label_prize_one.config(text="You have 2 correct in set one.Your prize is R20.",)
+                label_prize_one.config(text="You have 2 correct in set one.Your prize is R20.", )
                 label_prize_one.place(x=20, y=250)
                 self.winnings += 20.00
             elif len(set_prize_one) == 3:
@@ -297,6 +300,7 @@ class Main:
             label_winnings = Label(self.labelframe_display_results, text=f"TOTAL WINNINGS : R {str(self.winnings)}",
                                    font="20", bg="#3986d2")
             label_winnings.place(x=100, y=390)
+            writing_file(f"{str(self.winnings)}")
         except:
             pass
 
@@ -335,6 +339,7 @@ class Main:
         pass
 
     def cash_out(self):
+
         messagebox.showinfo("BANK DETAILS NEEDED", "WE WILL NEED YOUR BANKING DETAILS")
         self.window.destroy()
         import claiming_prizes
@@ -342,6 +347,7 @@ class Main:
 
     def exit_button(self):
         self.window.destroy()
+
 
 # Runs Login Screen
 Main()

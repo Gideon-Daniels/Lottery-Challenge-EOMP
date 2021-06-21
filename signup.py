@@ -7,14 +7,7 @@ from tkinter import *
 from tkinter import messagebox
 import datetime
 # Signup Screen Class
-
-
-def writing_file(name, surname, id, email, day, month, year):
-    f = open("users.txt", "w")
-    try:
-        f.write(name +"#"+surname+"#"+id+"#"+email+"#"+day+"#"+month+"#"+year)
-    finally:
-        f.close()
+from read_write_to_file import writing_file
 
 
 class SignUpScreen:
@@ -105,6 +98,10 @@ class SignUpScreen:
         try:
             now = datetime.timedelta()
             flag = True
+            writing_file(name=self.entry_name.get(), surname=self.entry_surname.get(), id=self.entry_id.get(),
+                         email=self.entry_email.get(), day=self.entry_days.get(),
+                         month=self.entry_months.get(),
+                         year=self.entry_years.get())
             if self.entry_name.get() == "" or self.entry_surname.get() == "" or self.entry_id.get() == "" or \
                     self.entry_email.get() == "" or self.entry_days.get() == "" or self.entry_months.get() == "" \
                     or self.entry_years.get() == "":
@@ -117,10 +114,6 @@ class SignUpScreen:
                 import main
         except ValueError:
             messagebox.showinfo("ERROR", "Value Error")
-        writing_file(name=self.entry_name.get(), surname=self.entry_surname.get(), id=self.entry_id.get(),
-                     email=self.entry_email.get(), day=self.entry_days.get(),
-                     month=self.entry_months.get(),
-                     year=self.entry_years.get())
 
     def exit_button(self):
         self.window.destroy()

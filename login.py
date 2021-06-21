@@ -4,7 +4,7 @@
 
 # import tkinter library
 from tkinter import *
-
+from tkinter import messagebox
 # Login Screen Class
 
 
@@ -60,8 +60,13 @@ class LoginScreen:
 
     # Functions for buttons
     def login_button(self):
-        self.window.destroy()
-        import main
+        if "@" not in self.entry_email.get():
+            messagebox.showwarning("WARNING", "Please enter valid email with @.")
+        elif len(self.entry_id.get()) != 13:
+            messagebox.showwarning("WARNING", "Please enter correct I.D with 13 digits")
+        else:
+            self.window.destroy()
+            import main
 
     def signup_button(self):
         self.window.destroy()

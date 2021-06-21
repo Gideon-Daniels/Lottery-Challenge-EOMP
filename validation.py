@@ -8,19 +8,16 @@ from tkinter import messagebox
 # Validates age is greater or equal to 18
 
 
-class Validation:
-    def __init__(self, email, id):
-        self.email = email
-        self.id = id
+def validate_email(self, ):
+    if "@" not in self.email:
+        messagebox.showwarning("ERROR", "PLEASE ENTER VAlID EMAIL WITH @")
 
-    def validate_email(self,):
-        if "@" not in self.email:
-            messagebox.showwarning("ERROR", "PLEASE ENTER VAlID EMAIL WITH @")
 
-    def validate_id(self):
-        if len(self.id) != 13:
-            messagebox.showwarning("ERROR", "PLEASE ENTER VALID ID CONTAINING 13 DIGITS")
+def validate_id(self):
+    if len(self.id) != 13:
+        messagebox.showwarning("ERROR", "PLEASE ENTER VALID ID CONTAINING 13 DIGITS")
 
-    def validate_entries(self,name, surname, day, month, year, id, email):
-        if name == "" or surname == "" or id == "" or day == "" or month == "" or year == "" or id == "" or email == "":
-            messagebox.showwarning("ERROR", "PLEASE FILL OUT ALL ENTRIES")
+
+def validate_entries(self, name, surname, day, month, year, id, email):
+    if name == "" or surname == "" or id == "" or day == "" or month == "" or year == "" or id == "" or email == "":
+        messagebox.showwarning("ERROR", "PLEASE FILL OUT ALL ENTRIES")
