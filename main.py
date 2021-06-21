@@ -1,17 +1,19 @@
 # Author : Gideon Daniels
 # Github :
 # Replit :
-
+# NOTES : - playing sound when button is clicked slows down program
 # import modules
 from tkinter import *
 from tkinter import messagebox
 import random
+from playsound import playsound
 
 
 class Main:
     def __init__(self):
         # create instance of frame
         self.window = Tk()
+        self.winnings = 0
         # position set for widgets
         self.button_posx = 20
         self.button_posy = 20
@@ -164,6 +166,7 @@ class Main:
         self.button_exit.place(y=580, x=750)
         self.button_display_prizes = Button(self.window, text="DISPLAY PRIZES", font="Times 12", bg="#ebec00",
                                             command=self.display_prizes)
+        self.button_display_prizes.place(y=350, x=425)
         # FOOTER
         self.labelframe_footer = LabelFrame(self.window, bg="#ebec00", width=200, heigh=100)
         self.labelframe_footer.pack(fill="both", side=BOTTOM)
@@ -197,10 +200,105 @@ class Main:
             messagebox.showinfo("INFO", "ALL SETS COMPLETED , PRESS PLAY")
             for y in range(len(self.buttons)):
                 self.buttons[y].config(state=DISABLED)
+        # playsound("button_clicked_sound.mp3")
 
     def display_prizes(self):
-       for x in self.set_list_one:
-           for
+        try:
+            set_prize_one = []
+            set_prize_two = []
+            set_prize_three = []
+            label_prize_one = Label(self.labelframe_display_results, text="", bg="#3986d2")
+            label_prize_two = Label(self.labelframe_display_results, text="", bg="#3986d2")
+            label_prize_three = Label(self.labelframe_display_results, text="", bg="#3986d2")
+            for x in self.set_lotto_draw:
+                if x in self.set_list_one:
+                    set_prize_one.append(x)
+                elif x in self.set_list_two:
+                    set_prize_two.append(x)
+                elif x in self.set_list_three:
+                    set_prize_three.append(x)
+            # Condition for set one
+            if len(set_prize_one) == 2:
+                label_prize_one.config(text="You have 2 correct in set one.Your prize is R20.",)
+                label_prize_one.place(x=20, y=250)
+                self.winnings += 20.00
+            elif len(set_prize_one) == 3:
+                label_prize_one.config(text="You have 3 correct in set one.Your prize is R100.50")
+                label_prize_one.place(x=20, y=250)
+                self.winnings += 100.50
+            elif len(set_prize_one) == 4:
+                label_prize_one.config(text="You have 4 correct in set one.Your prize is R2 384")
+                label_prize_one.place(x=20, y=250)
+                self.winnings += 2384.00
+            elif len(set_prize_one) == 5:
+                label_prize_one.config(text="You have 5 correct in set one.Your prize is R8584.00")
+                label_prize_one.place(x=20, y=250)
+                self.winnings += 8584.00
+            elif len(set_prize_one) == 6:
+                label_prize_one.config(text="You have 6 correct in set one.Your prize is R10000000.00")
+                label_prize_one.place(x=20, y=250)
+                self.winnings += 10000000.00
+            else:
+                label_prize_one.config(text="YOU HAVE ZERO WINNINGS IN SET ONE. PLAY AGAIN?")
+                label_prize_one.place(x=20, y=250)
+            # condition winnings in set two
+            if len(set_prize_two) == 2:
+                label_prize_two.config(text="You have 2 correct in set two.Your prize is R20")
+                label_prize_two.place(x=20, y=300)
+                self.winnings += 20.00
+            elif len(set_prize_two) == 3:
+                label_prize_two.config(text="You have 3 correct in set two.Your prize is R100.50")
+                label_prize_two.place(x=20, y=300)
+                self.winnings += 100.50
+            elif len(set_prize_two) == 4:
+                label_prize_two.config(text="You have 4 correct in set two.Your prize is R2 384")
+                label_prize_two.place(x=20, y=300)
+                self.winnings += 2384.00
+            elif len(set_prize_two) == 5:
+                label_prize_two.config(text="You have 5 correct in set two.Your prize is R8584.00")
+                label_prize_two.place(x=20, y=300)
+                self.winnings += 8584.00
+            elif len(set_prize_two) == 6:
+                label_prize_two.config(text="You have 6 correct in set two.Your prize is R10000000.00")
+                label_prize_two.place(x=20, y=300)
+                self.winnings += 10000000.00
+            else:
+                label_prize_two.config(text="YOU HAVE ZERO WINNINGS IN SET TWO. PLAY AGAIN?")
+                label_prize_two.place(x=20, y=300)
+            # condition winnings in set 3
+            if len(set_prize_three) == 2:
+                label_prize_three.config(text="You have 2 correct in set three.Your prize is R20")
+                label_prize_three.place(x=20, y=350)
+                self.winnings += 20.00
+            elif len(set_prize_three) == 3:
+                label_prize_three.config(text="You have 3 correct in set three.Your prize is R100.50")
+                self.winnings += 100.50
+                label_prize_three.place(x=20, y=350)
+            elif len(set_prize_three) == 4:
+                label_prize_three.config(text="You have 4 correct in set four.Your prize is R2 384")
+                self.winnings += 2384.00
+                label_prize_three.place(x=20, y=350)
+            elif len(set_prize_three) == 5:
+                label_prize_three.config(text="You have 5 correct in set five.Your prize is R8584.00")
+                self.winnings += 8584.00
+                label_prize_three.place(x=20, y=350)
+            elif len(set_prize_three) == 6:
+                label_prize_three.config(text="You have 5 correct in set six.Your prize is R10000000.00")
+                self.winnings += 10000000.00
+                label_prize_three.place(x=20, y=350)
+            else:
+                label_prize_three.config(text="YOU HAVE ZERO WINNINGS IN SET THREE. PLAY AGAIN?")
+                label_prize_three.place(x=20, y=350)
+            if self.winnings > 0:
+                playsound("winnings.mp3")
+            else:
+                self.button_cash_out.config(state=DISABLED)
+            self.button_display_prizes.config(state=DISABLED)
+            label_winnings = Label(self.labelframe_display_results, text=f"TOTAL WINNINGS : R {str(self.winnings)}",
+                                   font="20", bg="#3986d2")
+            label_winnings.place(x=100, y=390)
+        except:
+            pass
 
     # Functions for buttons
     def play(self):
@@ -237,13 +335,14 @@ class Main:
         pass
 
     def cash_out(self):
-        # self.window.destroy()
-        # import claiming_prizes
+        playsound("exit_button")
+        messagebox.showinfo("BANK DETAILS NEEDED", "WE WILL NEED YOUR BANKING DETAILS")
+        self.window.destroy()
+        import claiming_prizes
         pass
 
     def exit_button(self):
         self.window.destroy()
-
 
 # Runs Login Screen
 Main()
