@@ -5,21 +5,19 @@
 # import tkinter library
 from tkinter import *
 from tkinter import messagebox
+import datetime
 # Signup Screen Class
 
 
+def writing_file(name, surname, id, email, day, month, year):
+    f = open("users.txt", "w")
+    try:
+        f.write(name +"#"+surname+"#"+id+"#"+email+"#"+day+"#"+month+"#"+year)
+    finally:
+        f.close()
+
+
 class SignUpScreen:
-    # slaving gender
-    gender = StringVar
-    # Storing input into variables
-    # Storing Date Of Birth
-    names = StringVar
-    surname = StringVar
-    id = IntVar
-    email = StringVar
-    days = StringVar
-    months = StringVar
-    years = StringVar
 
     def __init__(self):
         # create instance of frame
@@ -65,11 +63,11 @@ class SignUpScreen:
         # Gender Selection Widget
         self.label_gender = Label(self.labelframe_login, text="GENDER", font="Times 16", bg="#ebec00")
         self.label_gender.place(y=180, x=100)
-        self.radio_button_male = Radiobutton(self.labelframe_login, text="MALE", value="MALE",
-                                             textvariable=self.gender, font="Times 16", bg="#3986d2")
+        self.radio_button_male = Radiobutton(self.labelframe_login, text="MALE", value="MALE"
+                                            , font="Times 16", bg="#3986d2")
         self.radio_button_male.place(y=180, x=250)
-        self.radio_button_female = Radiobutton(self.labelframe_login, text="FEMALE", value="FEMALE",
-                                               textvariable=self.gender, font="Times 16", bg="#3986d2")
+        self.radio_button_female = Radiobutton(self.labelframe_login, text="FEMALE", value="FEMALE"
+                                               , font="Times 16", bg="#3986d2")
         self.radio_button_female.place(y=180, x=351)
         # Date of birth widgets
         self.date_of_birth = Label(self.labelframe_login, text="D.O.B", font="Times 16", bg="#ebec00")
@@ -80,13 +78,13 @@ class SignUpScreen:
         self.label_months.place(y=220, x=310)
         self.label_years = Label(self.labelframe_login, text="YYYY", bg="#ebec00")
         self.label_years.place(y=220, x=375)
-        self.entry_days = Entry(self.labelframe_login, textvariable=self.days, font="Times 12", bg="#3986d2",
+        self.entry_days = Entry(self.labelframe_login, font="Times 12", bg="#3986d2",
                                 width=2)
         self.entry_days.place(y=220, x=280)
-        self.entry_months = Entry(self.labelframe_login, textvariable=self.months, font="Times 12", bg="#3986d2",
+        self.entry_months = Entry(self.labelframe_login, font="Times 12", bg="#3986d2",
                                   width=2)
         self.entry_months.place(y=220, x=345)
-        self.entry_years = Entry(self.labelframe_login, textvariable=self.years, font="Times 12", bg="#3986d2",
+        self.entry_years = Entry(self.labelframe_login, font="Times 12", bg="#3986d2",
                                  width=4)
         self.entry_years.place(y=220, x=420)
         # buttons
@@ -104,15 +102,25 @@ class SignUpScreen:
 
     # Functions for buttons
     def sign_up_button(self):
-        # import login
         try:
+            now = datetime.timedelta()
+            flag = True
             if self.entry_name.get() == "" or self.entry_surname.get() == "" or self.entry_id.get() == "" or \
                     self.entry_email.get() == "" or self.entry_days.get() == "" or self.entry_months.get() == "" \
                     or self.entry_years.get() == "":
+                flag = False
                 messagebox.showwarning("INVALID INPUT", "Please fill in all inputs")
-
+            elif len(self.entry_id.get()) != 13:
+                messagebox.showinfo("ERROR", "PLEASE ENTER 13 DIGITS FOR I.D")
+            if flag:
+                self.window.destroy()
+                import main
         except ValueError:
-            messagebox.showinfo("ERROR", "PLEASE ENTER 13 DIGITS FOR I.D")
+            messagebox.showinfo("ERROR", "Value Error")
+        writing_file(name=self.entry_name.get(), surname=self.entry_surname.get(), id=self.entry_id.get(),
+                     email=self.entry_email.get(), day=self.entry_days.get(),
+                     month=self.entry_months.get(),
+                     year=self.entry_years.get())
 
     def exit_button(self):
         self.window.destroy()

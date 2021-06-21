@@ -283,7 +283,7 @@ class Main:
                 self.winnings += 8584.00
                 label_prize_three.place(x=20, y=350)
             elif len(set_prize_three) == 6:
-                label_prize_three.config(text="You have 5 correct in set six.Your prize is R10000000.00")
+                label_prize_three.config(text="You have 6 correct in set six.Your prize is R10000000.00")
                 self.winnings += 10000000.00
                 label_prize_three.place(x=20, y=350)
             else:
@@ -335,7 +335,6 @@ class Main:
         pass
 
     def cash_out(self):
-        playsound("exit_button")
         messagebox.showinfo("BANK DETAILS NEEDED", "WE WILL NEED YOUR BANKING DETAILS")
         self.window.destroy()
         import claiming_prizes
