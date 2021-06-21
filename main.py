@@ -2,24 +2,42 @@
 # Github :
 # Replit :
 
-# import tkinter library
+# import modules
 from tkinter import *
-
-
-# Login Screen Class
+from tkinter import messagebox
+import random
 
 
 class Main:
     def __init__(self):
         # create instance of frame
         self.window = Tk()
-
+        # position set for widgets
+        self.button_posx = 20
+        self.button_posy = 20
+        self.label_posx = 100
+        self.label_posy = 20
+        # index counter for widgets
+        self.count_buttons = 0
+        self.count_labels_set_one = 0
+        self.count_labels_set_two = 0
+        self.count_labels_set_three = 0
         # List
-        self.my_list_one = []
-        self.my_list_two = []
-        self.my_list_three = []
-        self.my_winning_list = [2, 5, 28, 38, 16, 75]
-
+        # list used to store objects
+        self.buttons = []
+        self.labels_set_one = []
+        self.labels_set_two = []
+        self.labels_set_three = []
+        self.labels_set_lotto_numbers = []
+        # list used to store numbers // will be used in for final results
+        self.set_list_one = []
+        self.set_list_two = []
+        self.set_list_three = []
+        self.set_lotto_draw = []
+        # counter used to iterate to next label index
+        self.counter_one = 0
+        self.counter_two = 0
+        self.counter_three = 0
         # setting up window
         self.window.geometry("1080x720")
         self.window.config(bg="#3986d2")
@@ -33,196 +51,110 @@ class Main:
         self.label_header = Label(self.labelframe_header, text="WELCOME", bg="#ebec00", font="Times 30 bold")
         self.label_header.place(x=450, y=10)
         # Frames
-        self.labelframe_buttons = LabelFrame(self.window, bg="#ebec00", width=400, heigh=450)
-        self.labelframe_buttons.place(y=120, x=100)
+        self.labelframe_buttons = LabelFrame(self.window, bg="#ebec00", width=325, heigh=320)
+        self.labelframe_buttons.place(y=200, x=100)
         # Display buttons within frames
-        # ROW ONE
-        self.button_one = Button(self.labelframe_buttons, text="1", font="Times 12", bg="#3986d2",
-                                 command=lambda: self.displaying_numbers(1))
-        self.button_one.place(y=10, x=90)
-        self.button_two = Button(self.labelframe_buttons, text="2", font="Times 12", bg="#3986d2",
-                                 command=lambda: self.displaying_numbers(2))
-        self.button_two.place(y=10, x=130)
-        self.button_three = Button(self.labelframe_buttons, text="3", font="Times 12", bg="#3986d2",
-                                   command=lambda: self.displaying_numbers(3))
-        self.button_three.place(y=10, x=170)
-        self.button_four = Button(self.labelframe_buttons, text="4", font="Times 12", bg="#3986d2",
-                                  command=lambda: self.displaying_numbers(4))
-        self.button_four.place(y=10, x=210)
-        self.button_five = Button(self.labelframe_buttons, text="5", font="Times 12", bg="#3986d2",
-                                  command=lambda: self.displaying_numbers(5))
-        self.button_five.place(y=10, x=250)
-        # ROW TWO
-        self.button_six = Button(self.labelframe_buttons, text="6", font="Times 12", bg="#3986d2",
-                                 command=lambda: self.displaying_numbers(6))
-        self.button_six.place(y=50, x=90)
-        self.button_seven = Button(self.labelframe_buttons, text="7", font="Times 12", bg="#3986d2",
-                                   command=lambda: self.displaying_numbers(7))
-        self.button_seven.place(y=50, x=130)
-        self.button_eight = Button(self.labelframe_buttons, text="8", font="Times 12", bg="#3986d2",
-                                   command=lambda: self.displaying_numbers(8))
-        self.button_eight.place(y=50, x=170)
-        self.button_nine = Button(self.labelframe_buttons, text="9", font="Times 12", bg="#3986d2",
-                                  command=lambda: self.displaying_numbers(9))
-        self.button_nine.place(y=50, x=210)
-        self.button_ten = Button(self.labelframe_buttons, text="10", font="Times 12", bg="#3986d2", width=1,
-                                 command=lambda: self.displaying_numbers(10))
-        self.button_ten.place(y=50, x=250)
-        # ROW THREE
-        self.button_eleven = Button(self.labelframe_buttons, text="11", font="Times 12", bg="#3986d2", width=1,
-                                    command=lambda: self.displaying_numbers(11))
-        self.button_eleven.place(y=90, x=90)
-        self.button_twelve = Button(self.labelframe_buttons, text="12", font="Times 12", bg="#3986d2", width=1,
-                                    command=lambda: self.displaying_numbers(12))
-        self.button_twelve.place(y=90, x=130)
-        self.button_thirteen = Button(self.labelframe_buttons, text="13", font="Times 12", bg="#3986d2", width=1,
-                                      command=lambda: self.displaying_numbers(13))
-        self.button_thirteen.place(y=90, x=170)
-        self.button_fourteen = Button(self.labelframe_buttons, text="14", font="Times 12", bg="#3986d2", width=1,
-                                      command=lambda: self.displaying_numbers(14))
-        self.button_fourteen.place(y=90, x=210)
-        self.button_fifteen = Button(self.labelframe_buttons, text="15", font="Times 12", bg="#3986d2", width=1,
-                                     command=lambda: self.displaying_numbers(15))
-        self.button_fifteen.place(y=90, x=250)
-        # ROW FOUR
-        self.button_sixteen = Button(self.labelframe_buttons, text="16", font="Times 12", bg="#3986d2", width=1,
-                                     command=lambda: self.displaying_numbers(16))
-        self.button_sixteen.place(y=130, x=90)
-        self.button_seventeen = Button(self.labelframe_buttons, text="17", font="Times 12", bg="#3986d2", width=1,
-                                       command=lambda: self.displaying_numbers(17))
-        self.button_seventeen.place(y=130, x=130)
-        self.button_eighteen = Button(self.labelframe_buttons, text="18", font="Times 12", bg="#3986d2", width=1,
-                                      command=lambda: self.displaying_numbers(18))
-        self.button_eighteen.place(y=130, x=170)
-        self.button_nineteen = Button(self.labelframe_buttons, text="19", font="Times 12", bg="#3986d2", width=1,
-                                      command=lambda: self.displaying_numbers(19))
-        self.button_nineteen.place(y=130, x=210)
-        self.button_twenty = Button(self.labelframe_buttons, text="20", font="Times 12", bg="#3986d2", width=1,
-                                    command=lambda: self.displaying_numbers(20))
-        self.button_twenty.place(y=130, x=250)
-        # ROW FIVE
-        self.button_twenty_one = Button(self.labelframe_buttons, text="21", font="Times 12", bg="#3986d2", width=1,
-                                        command=lambda: self.displaying_numbers(21))
-        self.button_twenty_one.place(y=170, x=90)
-        self.button_twenty_two = Button(self.labelframe_buttons, text="22", font="Times 12", bg="#3986d2", width=1,
-                                        command=lambda: self.displaying_numbers(22))
-        self.button_twenty_two.place(y=170, x=130)
-        self.button_twenty_three = Button(self.labelframe_buttons, text="23", font="Times 12", bg="#3986d2", width=1,
-                                          command=lambda: self.displaying_numbers(23))
-        self.button_twenty_three.place(y=170, x=170)
-        self.button_twenty_four = Button(self.labelframe_buttons, text="24", font="Times 12", bg="#3986d2", width=1,
-                                         command=lambda: self.displaying_numbers(24))
-        self.button_twenty_four.place(y=170, x=210)
-        self.button_twenty_five = Button(self.labelframe_buttons, text="25", font="Times 12", bg="#3986d2", width=1,
-                                         command=lambda: self.displaying_numbers(25))
-        self.button_twenty_five.place(y=170, x=250)
-        # ROW SIX
-        self.button_twenty_six = Button(self.labelframe_buttons, text="26", font="Times 12", bg="#3986d2", width=1,
-                                        command=lambda: self.displaying_numbers(26))
-        self.button_twenty_six.place(y=210, x=90)
-        self.button_twenty_seven = Button(self.labelframe_buttons, text="27", font="Times 12", bg="#3986d2", width=1,
-                                          command=lambda: self.displaying_numbers(27))
-        self.button_twenty_seven.place(y=210, x=130)
-        self.button_twenty_eight = Button(self.labelframe_buttons, text="28", font="Times 12", bg="#3986d2", width=1,
-                                          command=lambda: self.displaying_numbers(28))
-        self.button_twenty_eight.place(y=210, x=170)
-        self.button_twenty_nine = Button(self.labelframe_buttons, text="29", font="Times 12", bg="#3986d2", width=1,
-                                         command=lambda: self.displaying_numbers(29))
-        self.button_twenty_nine.place(y=210, x=210)
-        self.button_thirty = Button(self.labelframe_buttons, text="30", font="Times 12", bg="#3986d2", width=1,
-                                    command=lambda: self.displaying_numbers(30))
-        self.button_thirty.place(y=210, x=250)
-        # ROW SEVEN
-        self.button_thirty_one = Button(self.labelframe_buttons, text="31", font="Times 12", bg="#3986d2", width=1,
-                                        command=lambda: self.displaying_numbers(31))
-        self.button_thirty_one.place(y=250, x=90)
-        self.button_thirty_three = Button(self.labelframe_buttons, text="32", font="Times 12", bg="#3986d2", width=1,
-                                          command=lambda: self.displaying_numbers(32))
-        self.button_thirty_three.place(y=250, x=130)
-        self.button_thirty_four = Button(self.labelframe_buttons, text="33", font="Times 12", bg="#3986d2", width=1,
-                                         command=lambda: self.displaying_numbers(33))
-        self.button_thirty_four.place(y=250, x=170)
-        self.button_thirty_four = Button(self.labelframe_buttons, text="34", font="Times 12", bg="#3986d2", width=1,
-                                         command=lambda: self.displaying_numbers(34))
-        self.button_thirty_four.place(y=250, x=210)
-        self.button_thirty_five = Button(self.labelframe_buttons, text="35", font="Times 12", bg="#3986d2", width=1,
-                                         command=lambda: self.displaying_numbers(35))
-        self.button_thirty_five.place(y=250, x=250)
-        # ROW EIGHT
-        self.button_thirty_six = Button(self.labelframe_buttons, text="36", font="Times 12", bg="#3986d2", width=1,
-                                        command=lambda: self.displaying_numbers(36))
-        self.button_thirty_six.place(y=290, x=90)
-        self.button_thirty_seven = Button(self.labelframe_buttons, text="37", font="Times 12", bg="#3986d2", width=1,
-                                          command=lambda: self.displaying_numbers(37))
-        self.button_thirty_seven.place(y=290, x=130)
-        self.button_thirty_eight = Button(self.labelframe_buttons, text="38", font="Times 12", bg="#3986d2", width=1,
-                                          command=lambda: self.displaying_numbers(38))
-        self.button_thirty_eight.place(y=290, x=170)
-        self.button_thirty_nine = Button(self.labelframe_buttons, text="39", font="Times 12", bg="#3986d2", width=1,
-                                         command=lambda: self.displaying_numbers(39))
-        self.button_thirty_nine.place(y=290, x=210)
-        self.button_forty = Button(self.labelframe_buttons, text="40", font="Times 12", bg="#3986d2", width=1,
-                                   command=lambda: self.displaying_numbers(40))
-        self.button_forty.place(y=290, x=250)
-        # ROW NINE
-        self.button_forty_one = Button(self.labelframe_buttons, text="41", font="Times 12", bg="#3986d2", width=1,
-                                       command=lambda: self.displaying_numbers(41))
-        self.button_forty_one.place(y=330, x=90)
-        self.button_forty_three = Button(self.labelframe_buttons, text="42", font="Times 12", bg="#3986d2", width=1,
-                                         command=lambda: self.displaying_numbers(42))
-        self.button_forty_three.place(y=330, x=130)
-        self.button_forty_four = Button(self.labelframe_buttons, text="43", font="Times 12", bg="#3986d2", width=1,
-                                        command=lambda: self.displaying_numbers(43))
-        self.button_forty_four.place(y=330, x=170)
-        self.button_forty_four = Button(self.labelframe_buttons, text="44", font="Times 12", bg="#3986d2", width=1,
-                                        command=lambda: self.displaying_numbers(44))
-        self.button_forty_four.place(y=330, x=210)
-        self.button_forty_five = Button(self.labelframe_buttons, text="45", font="Times 12", bg="#3986d2", width=1,
-                                        command=lambda: self.displaying_numbers(45))
-        self.button_forty_five.place(y=330, x=250)
-        # ROW TEN
-        self.button_forty_six = Button(self.labelframe_buttons, text="46", font="Times 12", bg="#3986d2", width=1,
-                                       command=lambda: self.displaying_numbers(46))
-        self.button_forty_six.place(y=370, x=90)
-        self.button_forty_seven = Button(self.labelframe_buttons, text="47", font="Times 12", bg="#3986d2", width=1,
-                                         command=lambda: self.displaying_numbers(47))
-        self.button_forty_seven.place(y=370, x=130)
-        self.button_forty_eight = Button(self.labelframe_buttons, text="48", font="Times 12", bg="#3986d2", width=1,
-                                         command=lambda: self.displaying_numbers(48))
-        self.button_forty_eight.place(y=370, x=170)
-        self.button_forty_nine = Button(self.labelframe_buttons, text="49", font="Times 12", bg="#3986d2", width=1,
-                                        command=lambda: self.displaying_numbers(49))
-        self.button_forty_nine.place(y=370, x=210)
-        # Display Sets
-        self.labelframe_display_sets = LabelFrame(self.window, bg="#ebec00", width=400, heigh=450)
-        self.labelframe_display_sets.place(y=120, x=580)
-        # Set One
-        self.label_set_one = Label(self.labelframe_display_sets, text="FIRST SET OF NUMBERS", bg="#ebec00")
-        self.label_set_one.place(y=10, x=100)
-        self.label_display_set_one = Label(self.labelframe_display_sets, bg="#ebec00")
-        self.label_display_set_one.place(y=40, x=110)
-        # Set Two
-        self.label_set_two = Label(self.labelframe_display_sets, text="SECOND SET OF NUMBERS", bg="#ebec00")
-        self.label_set_two.place(y=70, x=100)
-        self.label_display_set_two = Label(self.labelframe_display_sets, bg="#ebec00")
-        self.label_display_set_two.place(y=100, x=110)
-        # Set Three
-        self.label_set_two = Label(self.labelframe_display_sets, text="THIRD SET OF NUMBERS", bg="#ebec00")
-        self.label_set_two.place(y=130, x=100)
-        self.label_display_set_three = Label(self.labelframe_display_sets, bg="#ebec00")
-        self.label_display_set_three.place(y=160, x=110)
-        # Generating Lotto Numbers
-        self.button_display_lotto_numbers = Button(self.labelframe_display_sets, bg="#ebec00", text="DISPLAY LOTTO "
-                                                                                                    "NUMBERS",
-                                                   command=self.display_lotto_numbers)
-        self.button_display_lotto_numbers.place(y=200, x=90)
-        # Displaying Prizes
-        self.button_display_prizes = Button(self.labelframe_display_sets, bg="#ebec00", text="DISPLAY PRIZES",
-                                            command=self.display_prizes)
-        self.button_display_prizes.place(y=260, x=110)
+        # creates 49 buttons
+        for x in range(1, 50):
+            self.button = Button(self.labelframe_buttons, text=str(x), width=3, font="12", bg="#3986d2", padx=2)
+            self.buttons.append(self.button)
+            self.buttons[self.count_buttons].place(x=self.button_posx, y=self.button_posy)
+            self.count_buttons += 1
+            self.button_posx += 40
+            if self.button_posx == 300:
+                self.button_posy += 40
+                self.button_posx = 20
+        # configure each button to a command //
+        self.buttons[0].config(command=lambda: self.button_clicked(1))
+        self.buttons[1].config(command=lambda: self.button_clicked(2))
+        self.buttons[2].config(command=lambda: self.button_clicked(3))
+        self.buttons[3].config(command=lambda: self.button_clicked(4))
+        self.buttons[4].config(command=lambda: self.button_clicked(5))
+        self.buttons[5].config(command=lambda: self.button_clicked(6))
+        self.buttons[6].config(command=lambda: self.button_clicked(7))
+        self.buttons[7].config(command=lambda: self.button_clicked(8))
+        self.buttons[8].config(command=lambda: self.button_clicked(9))
+        self.buttons[9].config(command=lambda: self.button_clicked(10))
+        self.buttons[10].config(command=lambda: self.button_clicked(11))
+        self.buttons[11].config(command=lambda: self.button_clicked(12))
+        self.buttons[12].config(command=lambda: self.button_clicked(13))
+        self.buttons[13].config(command=lambda: self.button_clicked(14))
+        self.buttons[14].config(command=lambda: self.button_clicked(15))
+        self.buttons[15].config(command=lambda: self.button_clicked(16))
+        self.buttons[16].config(command=lambda: self.button_clicked(17))
+        self.buttons[17].config(command=lambda: self.button_clicked(18))
+        self.buttons[18].config(command=lambda: self.button_clicked(19))
+        self.buttons[19].config(command=lambda: self.button_clicked(20))
+        self.buttons[20].config(command=lambda: self.button_clicked(21))
+        self.buttons[21].config(command=lambda: self.button_clicked(22))
+        self.buttons[22].config(command=lambda: self.button_clicked(23))
+        self.buttons[23].config(command=lambda: self.button_clicked(24))
+        self.buttons[24].config(command=lambda: self.button_clicked(25))
+        self.buttons[25].config(command=lambda: self.button_clicked(26))
+        self.buttons[26].config(command=lambda: self.button_clicked(27))
+        self.buttons[27].config(command=lambda: self.button_clicked(28))
+        self.buttons[28].config(command=lambda: self.button_clicked(29))
+        self.buttons[29].config(command=lambda: self.button_clicked(30))
+        self.buttons[30].config(command=lambda: self.button_clicked(31))
+        self.buttons[31].config(command=lambda: self.button_clicked(32))
+        self.buttons[32].config(command=lambda: self.button_clicked(33))
+        self.buttons[33].config(command=lambda: self.button_clicked(34))
+        self.buttons[34].config(command=lambda: self.button_clicked(35))
+        self.buttons[35].config(command=lambda: self.button_clicked(36))
+        self.buttons[36].config(command=lambda: self.button_clicked(37))
+        self.buttons[37].config(command=lambda: self.button_clicked(38))
+        self.buttons[38].config(command=lambda: self.button_clicked(39))
+        self.buttons[39].config(command=lambda: self.button_clicked(40))
+        self.buttons[40].config(command=lambda: self.button_clicked(41))
+        self.buttons[41].config(command=lambda: self.button_clicked(42))
+        self.buttons[42].config(command=lambda: self.button_clicked(43))
+        self.buttons[43].config(command=lambda: self.button_clicked(44))
+        self.buttons[44].config(command=lambda: self.button_clicked(45))
+        self.buttons[45].config(command=lambda: self.button_clicked(46))
+        self.buttons[46].config(command=lambda: self.button_clicked(47))
+        self.buttons[47].config(command=lambda: self.button_clicked(48))
+        self.buttons[48].config(command=lambda: self.button_clicked(49))
+
+        # Display Results
+        self.labelframe_display_results = LabelFrame(self.window, bg="#ebec00", width=400, heigh=450)
+        self.labelframe_display_results.place(y=120, x=580)
+        self.label_lotto_draw_heading = Label(self.labelframe_display_results, bg="#ebec00")
+        self.label_lotto_draw_heading.place(y=185, x=10)
+        # Create 6 labels for set one
+        for x in range(0, 6):
+            self.label_number = Label(self.labelframe_display_results, bg="#ebec00", text="")
+            self.labels_set_one.append(self.label_number)
+            self.labels_set_one[self.count_labels_set_one].place(x=self.label_posx, y=self.label_posy)
+            self.label_posx += 40
+            if self.count_labels_set_one >= 5:
+                self.label_posy += 50  # distance between next set on y-axis
+                self.label_posx = 100  # resets position on x-axis
+            self.count_labels_set_one += 1
+        # Create 6 labels for set two
+        for x in range(0, 6):
+            self.label_number = Label(self.labelframe_display_results, bg="#ebec00", text="")
+            self.labels_set_two.append(self.label_number)
+            self.labels_set_two[self.count_labels_set_two].place(x=self.label_posx, y=self.label_posy)
+            self.label_posx += 40
+            if self.count_labels_set_two >= 5:
+                self.label_posy += 50  # distance between next set on y-axis
+                self.label_posx = 100  # resets position on x-axis
+            self.count_labels_set_two += 1
+
+        # Create 6 labels for set three
+        for x in range(0, 6):
+            self.label_number = Label(self.labelframe_display_results, bg="#ebec00", text="")
+            self.labels_set_three.append(self.label_number)
+            self.labels_set_three[self.count_labels_set_three].place(x=self.label_posx, y=self.label_posy)
+            self.label_posx += 40
+            self.count_labels_set_three += 1
+
         # buttons
+        self.button_play = Button(self.window, text="PLAY", font="Times 12", bg="#ebec00",
+                                  command=self.play)
+        self.button_play.place(y=300, x=480)
         self.button_play_again = Button(self.window, text="PLAY AGAIN", font="Times 12", bg="#ebec00",
-                                        command=self.play)
+                                        command=self.play_again)
         self.button_play_again.place(y=580, x=250)
         self.button_cash_out = Button(self.window, text="CASH OUT", font="Times 12", bg="#ebec00",
                                       command=self.cash_out)
@@ -230,6 +162,8 @@ class Main:
         self.button_exit = Button(self.window, text="EXIT", font="Times 12", bg="#ebec00",
                                   command=self.exit_button)
         self.button_exit.place(y=580, x=750)
+        self.button_display_prizes = Button(self.window, text="DISPLAY PRIZES", font="Times 12", bg="#ebec00",
+                                            command=self.display_prizes)
         # FOOTER
         self.labelframe_footer = LabelFrame(self.window, bg="#ebec00", width=200, heigh=100)
         self.labelframe_footer.pack(fill="both", side=BOTTOM)
@@ -237,38 +171,75 @@ class Main:
         self.window.mainloop()
 
     # Function for each button
-    def display_lotto_numbers(self):
-        label_display_lottoNumbers = Label(self.labelframe_display_sets, text=self.my_winning_list)
-        label_display_lottoNumbers.place(y=235, x=130)
+    def button_clicked(self, num):
+        self.buttons[num - 1].config(state=DISABLED)
+        # Condition for set one
+        if len(self.set_list_one) <= 6 and self.counter_one < 6:
+            self.labels_set_one[self.counter_one].config(text=str(num), width=3, bg="#3986d2")
+            self.counter_one += 1
+            self.set_list_one.append(num)
+            if len(self.set_list_one) == 6:
+                messagebox.showinfo("INFO", "Start Choosing Second Set")
+        # Condition for set two
+        elif len(self.set_list_one) >= 6 and len(self.set_list_two) <= 6 and self.counter_two < 6:
+            self.labels_set_two[self.counter_two].config(text=str(num), width=3, bg="#3986d2")
+            self.counter_two += 1
+            self.set_list_two.append(num)
+            if len(self.set_list_two) == 6:
+                messagebox.showinfo("INFO", "Start Choosing Third Set")
+        # Condition for set three
+        elif len(self.set_list_one) >= 6 and len(self.set_list_two) >= 6 and len(
+                self.set_list_three) <= 6 and self.counter_three < 6:
+            self.labels_set_three[self.counter_three].config(text=str(num), width=3, bg="#3986d2")
+            self.counter_three += 1
+            self.set_list_three.append(num)
+        if len(self.set_list_three) == 6:
+            messagebox.showinfo("INFO", "ALL SETS COMPLETED , PRESS PLAY")
+            for y in range(len(self.buttons)):
+                self.buttons[y].config(state=DISABLED)
 
     def display_prizes(self):
-        label_first_set_winning = Label(self.labelframe_display_sets, text="Winnings From Set One ", bg="#ebec00")
-        label_first_set_winning.place(y=300, x=10)
-        label_second_set_winning = Label(self.labelframe_display_sets, text="Winnings From Set Two ", bg="#ebec00")
-        label_second_set_winning.place(y=350, x=10)
-        label_third_set_winning = Label(self.labelframe_display_sets, text="Winnings From Set Three ", bg="#ebec00")
-        label_third_set_winning.place(y=400, x=10)
-
-    def displaying_numbers(self, num):
-        if len(self.my_list_one) < 6 and num not in self.my_list_one:
-            self.my_list_one.append(num)
-            self.label_display_set_one.config(text=str(self.my_list_one))
-        elif len(self.my_list_two) < 6 and len(self.my_list_one) == 6 and num not in self.my_list_two and num not in \
-                self.my_list_one:
-            self.my_list_two.append(num)
-            self.label_display_set_two.config(text=str(self.my_list_two))
-        elif len(self.my_list_three) < 6 and len(self.my_list_two) == 6 and len(self.my_list_one) == 6 and num not in\
-                self.my_list_three and num not in self.my_list_two and num not in self.my_list_one:
-            self.my_list_three.append(num)
-            self.label_display_set_three.config(text=str(self.my_list_three))
+       for x in self.set_list_one:
+           for
 
     # Functions for buttons
     def play(self):
+        if len(self.set_list_three) == 6:
+            posx = 200
+            posy = 185
+            self.label_lotto_draw_heading.config(text="LOTTO DRAW NUMBERS : ", bg="#3986d2")
+            for x in range(0, 6):
+                numbers = random.randint(1, 49)
+                self.set_lotto_draw.append(numbers)
+                label_lotto_draw = Label(self.labelframe_display_results, text=str(numbers), width=2, bg="#3986d2")
+                label_lotto_draw.place(x=posx, y=posy)
+                posx += 30
+            print(self.set_lotto_draw)
+            self.button_play.config(state=DISABLED)
+        else:
+            messagebox.showwarning("WARNING", "PLEASE SELECT ALL SETS FIRST")
+
+    def play_again(self):
+        # for x in range(0, 6):
+        #     self.labels_set_one[x].config(bg="#ebec00", text="")
+        #     self.labels_set_two[x].config(bg="#ebec00", text="")
+        #     self.labels_set_three[x].config(bg="#ebec00", text="")
+        #
+        # self.label_lotto_draw_heading.config(bg="#ebec00", text="")
+        # self.label_blank = Label(self.labelframe_display_results,bg="#ebec00", text="", width=30)
+        # self.label_blank.place(x=200, y=185)
+        # self.set_lotto_draw.clear()
+        # self.set_list_one.clear()
+        # self.set_list_two.clear()
+        # self.set_list_three.clear()
+        # self.button_play.config(state=NORMAL)
+        #
         pass
 
     def cash_out(self):
-        self.window.destroy()
-        import claiming_prizes
+        # self.window.destroy()
+        # import claiming_prizes
+        pass
 
     def exit_button(self):
         self.window.destroy()
