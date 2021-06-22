@@ -1,7 +1,7 @@
 def writing_file(name, surname, id, email, day, month, year):
     f = open("users.txt", "w+")
     try:
-        f.write(name + "#" + surname+"#"+id+"#"+email+"#"+day+"#"+month+"#"+year)
+        f.write(name)
 
     finally:
         f.close()
