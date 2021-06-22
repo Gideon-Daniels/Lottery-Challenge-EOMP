@@ -1,6 +1,6 @@
 # Author : Gideon Daniels
-# Github :
-# Replit :
+# Github :https://github.com/Gideon-Daniels/Lottery-Challenge-EOMP
+# Replit :https://replit.com/@GideonDaniels/Lottery-Challenge-EOMP#login.py
 
 # import tkinter library
 from tkinter import *

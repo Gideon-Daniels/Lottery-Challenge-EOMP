@@ -322,28 +322,18 @@ class Main:
             messagebox.showwarning("WARNING", "PLEASE SELECT ALL SETS FIRST")
 
     def play_again(self):
-        # for x in range(0, 6):
-        #     self.labels_set_one[x].config(bg="#ebec00", text="")
-        #     self.labels_set_two[x].config(bg="#ebec00", text="")
-        #     self.labels_set_three[x].config(bg="#ebec00", text="")
-        #
-        # self.label_lotto_draw_heading.config(bg="#ebec00", text="")
-        # self.label_blank = Label(self.labelframe_display_results,bg="#ebec00", text="", width=30)
-        # self.label_blank.place(x=200, y=185)
-        # self.set_lotto_draw.clear()
-        # self.set_list_one.clear()
-        # self.set_list_two.clear()
-        # self.set_list_three.clear()
-        # self.button_play.config(state=NORMAL)
-        #
-        pass
+        self.window.destroy()
+        import main
 
     def cash_out(self):
-
-        messagebox.showinfo("BANK DETAILS NEEDED", "WE WILL NEED YOUR BANKING DETAILS")
-        self.window.destroy()
-        import claiming_prizes
-        pass
+        f = open("winnings.txt", "w+")
+        try:
+            f.write(str(self.winnings))
+            messagebox.showinfo("BANK DETAILS NEEDED", "WE WILL NEED YOUR BANKING DETAILS")
+            self.window.destroy()
+            import claiming_prizes
+        finally:
+            f.close()
 
     def exit_button(self):
         self.window.destroy()
