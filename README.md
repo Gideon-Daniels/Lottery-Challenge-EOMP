@@ -1,1 +1,0 @@
-# Lottery-Challenge-EOMP
